@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import ExpenseCategory, Receipt, Account
+from receipts.models import ExpenseCategory, Receipt, Account
 
 # Create your views here.
 
@@ -7,6 +7,6 @@ from .models import ExpenseCategory, Receipt, Account
 def show_receipt(request):
     receipt = Receipt.objects.all()
     context = {
-        "receipts": receipt,
+        "receipts_object": receipt,
     }
-    return render(request, "receipts/receipts.html", context)
+    return render(request, "receipts/receipts_list.html", context)
