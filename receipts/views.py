@@ -7,15 +7,6 @@ from .forms import ReceiptForm
 
 
 @login_required
-def show_receipt(request):
-    receipt = Receipt.objects.filter(purchaser=request.user)
-    context = {
-        "receipts_object": receipt,
-    }
-    return render(request, "receipts/receipts_list.html", context)
-
-
-@login_required
 def create_receipt(request):
     if request.method == "POST":
         form = ReceiptForm(request.POST)
@@ -32,3 +23,30 @@ def create_receipt(request):
     }
 
     return render(request, "receipts/create_receipt.html", context)
+
+
+@login_required
+def show_receipt(request):
+    receipt = Receipt.objects.filter(purchaser=request.user)
+    context = {
+        "receipts_object": receipt,
+    }
+    return render(request, "receipts/receipts_list.html", context)
+
+
+@login_required
+def show_category(request):
+    category = ExpenseCategory.objects.filter(owner=request.user)
+    context = {
+        "categories_object": category,
+    }
+    return render(request, "receipts/category_list.html", context)
+
+
+@login_required
+def show_account(request):
+    account = Account.objects.filter(owner=request.user)
+    context = {
+        "accounts_object": account,
+    }
+    return render(request, "receipts/account_list.html", context)

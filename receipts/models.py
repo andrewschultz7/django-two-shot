@@ -13,6 +13,16 @@ class ExpenseCategory(models.Model):
     )
 
 
+class Account(models.Model):
+    name = models.CharField(max_length=100)
+    number = models.CharField(max_length=20)
+    owner = models.ForeignKey(
+        User,
+        related_name="accounts",
+        on_delete=models.CASCADE,
+    )
+
+
 class Receipt(models.Model):
     vendor = models.CharField(max_length=200)
     total = models.DecimalField(max_digits=10, decimal_places=3)
@@ -24,23 +34,14 @@ class Receipt(models.Model):
         on_delete=models.CASCADE,
     )
     category = models.ForeignKey(
-        "ExpenseCategory",
-        related_name="receipts",
-        on_delete=models.CASCADE,
-    )
-    account = models.ForeignKey(
-        "Account",
+        ExpenseCategory,
         related_name="receipts",
         on_delete=models.CASCADE,
         null=True,
     )
-
-
-class Account(models.Model):
-    name = models.CharField(max_length=100)
-    number = models.CharField(max_length=20)
-    owner = models.ForeignKey(
-        User,
-        related_name="accounts",
+    account = models.ForeignKey(
+        Account,
+        related_name="receipts",
         on_delete=models.CASCADE,
+        null=True,
     )

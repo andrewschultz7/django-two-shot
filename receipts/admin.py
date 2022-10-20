@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import ExpenseCategory, Receipt, Account
+from .models import Receipt, Account, ExpenseCategory
 
 # Register your models here.
+
+
 @admin.register(ExpenseCategory)
 class ExpenseCategoryAdmin(admin.ModelAdmin):
     list_display = (
